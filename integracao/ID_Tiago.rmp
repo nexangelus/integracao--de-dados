@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.10.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="concurrency:loop_files" compatibility="9.10.001" expanded="true" height="82" name="Loop Files" width="90" x="112" y="34">
+        <parameter key="directory" value="C:/Projeto/Datasets/DadosEstacoesMeteorologicas/"/>
+        <parameter key="filter_type" value="glob"/>
+        <parameter key="recursive" value="true"/>
+        <parameter key="enable_macros" value="false"/>
+        <parameter key="macro_for_file_name" value="file_name"/>
+        <parameter key="macro_for_file_type" value="file_type"/>
+        <parameter key="macro_for_folder_name" value="folder_name"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="read_csv" compatibility="9.10.001" expanded="true" height="68" name="Read CSV" width="90" x="112" y="34">
+            <parameter key="csv_file" value="C:\Projeto\Datasets\DadosMeteorologicos\Input_Teste\A-DOS-FRANCOS.csv"/>
+            <parameter key="column_separators" value=","/>
+            <parameter key="trim_lines" value="false"/>
+            <parameter key="use_quotes" value="true"/>
+            <parameter key="quotes_character" value="&quot;"/>
+            <parameter key="escape_character" value="\"/>
+            <parameter key="skip_comments" value="true"/>
+            <parameter key="comment_characters" value="#"/>
+            <parameter key="starting_row" value="1"/>
+            <parameter key="parse_numbers" value="true"/>
+            <parameter key="decimal_character" value="."/>
+            <parameter key="grouped_digits" value="false"/>
+            <parameter key="grouping_character" value=","/>
+            <parameter key="infinity_representation" value=""/>
+            <parameter key="date_format" value="dd/MM/yyyy"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="encoding" value="windows-1252"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information">
+              <parameter key="0" value="Nome Estacão.true.polynominal.attribute"/>
+              <parameter key="1" value="Data.true.date.attribute"/>
+              <parameter key="2" value="Humidade relativa média diária (%).true.polynominal.attribute"/>
+              <parameter key="3" value="Precipitação diária (mm).true.polynominal.attribute"/>
+              <parameter key="4" value="Temperatura do ar média diária (°C).true.polynominal.attribute"/>
+              <parameter key="5" value="Velocidade do vento média diária (m/s).true.polynominal.attribute"/>
+            </list>
+            <parameter key="read_not_matching_values_as_missings" value="false"/>
+          </operator>
+          <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples" width="90" x="380" y="34">
+            <parameter key="parameter_expression" value=""/>
+            <parameter key="condition_class" value="custom_filters"/>
+            <parameter key="invert_filter" value="false"/>
+            <list key="filters_list">
+              <parameter key="filters_entry_key" value="Temperatura do ar média diária (°C).is_not_missing."/>
+              <parameter key="filters_entry_key" value="Humidade relativa média diária (%).is_not_missing."/>
+              <parameter key="filters_entry_key" value="Precipitação diária (mm).is_not_missing."/>
+              <parameter key="filters_entry_key" value="Velocidade do vento média diária (m/s).is_not_missing."/>
+            </list>
+            <parameter key="filters_logic_and" value="false"/>
+            <parameter key="filters_check_metadata" value="true"/>
+          </operator>
+          <connect from_port="file object" to_op="Read CSV" to_port="file"/>
+          <connect from_op="Read CSV" from_port="output" to_op="Filter Examples" to_port="example set input"/>
+          <connect from_op="Filter Examples" from_port="example set output" to_port="output 1"/>
+          <portSpacing port="source_file object" spacing="0"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="append" compatibility="9.10.001" expanded="true" height="82" name="Append" width="90" x="246" y="34">
+        <parameter key="datamanagement" value="double_array"/>
+        <parameter key="data_management" value="auto"/>
+        <parameter key="merge_type" value="all"/>
+      </operator>
+      <operator activated="true" class="date_to_nominal" compatibility="9.10.001" expanded="true" height="82" name="Date to Nominal" width="90" x="380" y="34">
+        <parameter key="attribute_name" value="Data"/>
+        <parameter key="date_format" value="MM/dd/yyyy"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="keep_old_attribute" value="false"/>
+      </operator>
+      <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes" width="90" x="514" y="34">
+        <list key="function_descriptions">
+          <parameter key="teste" value="concat(Data,concat(&quot; &quot;,[Nome Estacão]))"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <connect from_op="Loop Files" from_port="output 1" to_op="Append" to_port="example set 1"/>
+      <connect from_op="Append" from_port="merged set" to_op="Date to Nominal" to_port="example set input"/>
+      <connect from_op="Date to Nominal" from_port="example set output" to_op="Generate Attributes" to_port="example set input"/>
+      <connect from_op="Generate Attributes" from_port="example set output" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
