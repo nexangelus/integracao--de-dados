@@ -12,7 +12,7 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Incendios" width="90" x="45" y="34">
+      <operator activated="false" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Incendios" width="90" x="45" y="34">
         <process expanded="true">
           <operator activated="true" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Incendios1980-92" width="90" x="112" y="34">
             <process expanded="true">
@@ -4518,39 +4518,39 @@
           <description align="center" color="orange" colored="true" height="960" resized="true" width="233" x="806" y="10">Gerar codigo da causa</description>
         </process>
       </operator>
-      <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve incendios" width="90" x="45" y="136">
+      <operator activated="false" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve incendios" width="90" x="45" y="136">
         <parameter key="repository_entry" value="../store/incendios"/>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Subprocess (19)" width="90" x="179" y="136">
+      <operator activated="false" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Subprocess (19)" width="90" x="179" y="136">
         <process expanded="true">
-          <operator activated="true" class="nominal_to_date" compatibility="9.10.001" expanded="true" height="82" name="Nominal to Date" width="90" x="45" y="34">
+          <operator activated="true" class="nominal_to_date" compatibility="9.10.001" expanded="true" height="82" name="Nominal to Date" width="90" x="112" y="34">
             <parameter key="attribute_name" value="data inicio"/>
             <parameter key="date_type" value="date"/>
             <parameter key="date_format" value="MM/dd/yyyy"/>
             <parameter key="time_zone" value="SYSTEM"/>
             <parameter key="locale" value="English (United States)"/>
-            <parameter key="keep_old_attribute" value="false"/>
+            <parameter key="keep_old_attribute" value="true"/>
           </operator>
-          <operator activated="true" class="date_to_nominal" compatibility="9.10.001" expanded="true" height="82" name="Date to Nominal (6)" width="90" x="179" y="34">
+          <operator activated="true" class="date_to_nominal" compatibility="9.10.001" expanded="true" height="82" name="Date to Nominal (6)" width="90" x="246" y="34">
             <parameter key="attribute_name" value="data inicio"/>
             <parameter key="date_format" value="MM/dd/yyyy"/>
             <parameter key="time_zone" value="SYSTEM"/>
             <parameter key="locale" value="English (United States)"/>
             <parameter key="keep_old_attribute" value="false"/>
           </operator>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (65)" width="90" x="313" y="34">
+          <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (65)" width="90" x="380" y="34">
             <list key="function_descriptions">
               <parameter key="distrito" value="upper(distrito)"/>
             </list>
             <parameter key="keep_all" value="true"/>
           </operator>
-          <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (64)" width="90" x="447" y="34">
+          <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (64)" width="90" x="514" y="34">
             <list key="function_descriptions">
-              <parameter key="teste" value="concat([data inicio],concat(&quot; &quot;,distrito))"/>
+              <parameter key="chave" value="concat([data inicio],concat(&quot; &quot;,distrito))"/>
             </list>
             <parameter key="keep_all" value="true"/>
           </operator>
-          <operator activated="true" class="map" compatibility="9.10.001" expanded="true" height="82" name="Map (7)" width="90" x="581" y="34">
+          <operator activated="true" class="map" compatibility="9.10.001" expanded="true" height="82" name="Map (7)" width="90" x="648" y="34">
             <parameter key="attribute_filter_type" value="single"/>
             <parameter key="attribute" value="distrito"/>
             <parameter key="attributes" value=""/>
@@ -4584,7 +4584,7 @@
           <portSpacing port="sink_out 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="concurrency:loop_files" compatibility="9.10.001" expanded="true" height="82" name="Loop Files" width="90" x="45" y="289">
+      <operator activated="false" class="concurrency:loop_files" compatibility="9.10.001" expanded="true" height="82" name="Loop Files" width="90" x="45" y="289">
         <parameter key="directory" value="C:/Projeto/Datasets/DadosEstacoesMeteorologicas/"/>
         <parameter key="filter_type" value="glob"/>
         <parameter key="recursive" value="true"/>
@@ -4595,7 +4595,7 @@
         <parameter key="reuse_results" value="false"/>
         <parameter key="enable_parallel_execution" value="true"/>
         <process expanded="true">
-          <operator activated="true" class="read_csv" compatibility="9.10.001" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
+          <operator activated="true" class="read_csv" compatibility="9.10.001" expanded="true" height="68" name="Read CSV" width="90" x="112" y="34">
             <parameter key="csv_file" value="C:\Projeto\Datasets\DadosMeteorologicos\Input_Teste\A-DOS-FRANCOS.csv"/>
             <parameter key="column_separators" value=","/>
             <parameter key="trim_lines" value="false"/>
@@ -4628,7 +4628,7 @@
             </list>
             <parameter key="read_not_matching_values_as_missings" value="false"/>
           </operator>
-          <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (7)" width="90" x="179" y="34">
+          <operator activated="true" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (7)" width="90" x="380" y="34">
             <parameter key="parameter_expression" value=""/>
             <parameter key="condition_class" value="custom_filters"/>
             <parameter key="invert_filter" value="false"/>
@@ -4650,12 +4650,12 @@
           <portSpacing port="sink_output 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="append" compatibility="9.10.001" expanded="true" height="82" name="Append (3)" width="90" x="179" y="289">
+      <operator activated="false" class="append" compatibility="9.10.001" expanded="true" height="82" name="Append (3)" width="90" x="179" y="289">
         <parameter key="datamanagement" value="double_array"/>
         <parameter key="data_management" value="auto"/>
         <parameter key="merge_type" value="all"/>
       </operator>
-      <operator activated="true" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Subprocess (20)" width="90" x="313" y="289">
+      <operator activated="false" class="subprocess" compatibility="9.10.001" expanded="true" height="82" name="Subprocess (20)" width="90" x="313" y="289">
         <process expanded="true">
           <operator activated="true" class="date_to_nominal" compatibility="9.10.001" expanded="true" height="82" name="Date to Nominal (5)" width="90" x="112" y="34">
             <parameter key="attribute_name" value="Data"/>
@@ -4708,7 +4708,7 @@
           </operator>
           <operator activated="true" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (10)" width="90" x="648" y="34">
             <list key="function_descriptions">
-              <parameter key="teste" value="concat(Data,concat(&quot; &quot;,Distrito))"/>
+              <parameter key="chave" value="concat(Data,concat(&quot; &quot;,Distrito))"/>
             </list>
             <parameter key="keep_all" value="true"/>
           </operator>
@@ -4724,25 +4724,54 @@
           <portSpacing port="sink_out 2" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (4)" width="90" x="447" y="289">
-        <parameter key="repository_entry" value="../store/meteo_tratados"/>
-      </operator>
-      <operator activated="true" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (13)" width="90" x="581" y="136">
+      <operator activated="false" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (13)" width="90" x="313" y="136">
         <parameter key="remove_double_attributes" value="true"/>
         <parameter key="join_type" value="left"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
         <list key="key_attributes">
-          <parameter key="teste" value="teste"/>
+          <parameter key="chave" value="chave"/>
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (2)" width="90" x="715" y="136">
+      <operator activated="false" class="nominal_to_date" compatibility="9.10.001" expanded="true" height="82" name="Nominal to Date (2)" width="90" x="447" y="136">
+        <parameter key="attribute_name" value="data fim"/>
+        <parameter key="date_type" value="date_time"/>
+        <parameter key="date_format" value="dd/MM/yyyy HH:mm"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="keep_old_attribute" value="false"/>
+      </operator>
+      <operator activated="false" class="nominal_to_date" compatibility="9.10.001" expanded="true" height="82" name="Nominal to Date (21)" width="90" x="581" y="136">
+        <parameter key="attribute_name" value="data inicio_old"/>
+        <parameter key="date_type" value="date_time"/>
+        <parameter key="date_format" value="dd/MM/yyyy HH:mm"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="keep_old_attribute" value="false"/>
+      </operator>
+      <operator activated="false" class="generate_attributes" compatibility="9.10.001" expanded="true" height="82" name="Generate Attributes (67)" width="90" x="715" y="136">
+        <list key="function_descriptions">
+          <parameter key="duracao(horas)" value="if(date_diff([data inicio_old],[data fim])/3600000&lt;0,MISSING_NUMERIC,date_diff([data inicio_old],[data fim])/3600000)"/>
+        </list>
+        <parameter key="keep_all" value="true"/>
+      </operator>
+      <operator activated="false" class="blending:rename" compatibility="9.10.001" expanded="true" height="82" name="Rename (36)" width="90" x="849" y="136">
+        <list key="rename attributes">
+          <parameter key="average(Humidade relativa média diária (%))" value="Humidade relativa média diária (%)"/>
+          <parameter key="average(Precipitação diária (mm))" value="Precipitação média diária (mm)"/>
+          <parameter key="average(Temperatura do ar média diária (°C))" value="Temperatura do ar média diária (°C)"/>
+          <parameter key="average(Velocidade do vento média diária (m/s))" value="Velocidade do vento média diária (m/s)"/>
+        </list>
+        <parameter key="from_attribute" value=""/>
+        <parameter key="to_attribute" value=""/>
+      </operator>
+      <operator activated="false" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (2)" width="90" x="983" y="136">
         <parameter key="repository_entry" value="../store/incmet"/>
       </operator>
       <operator activated="true" class="retrieve" compatibility="9.10.001" expanded="true" height="68" name="Retrieve incmet" width="90" x="45" y="442">
         <parameter key="repository_entry" value="../store/incmet"/>
       </operator>
-      <operator activated="false" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (9)" width="90" x="45" y="595">
+      <operator activated="false" class="filter_examples" compatibility="9.10.001" expanded="true" height="103" name="Filter Examples (9)" width="90" x="112" y="544">
         <parameter key="parameter_expression" value=""/>
         <parameter key="condition_class" value="custom_filters"/>
         <parameter key="invert_filter" value="false"/>
@@ -4755,7 +4784,7 @@
         <parameter key="filters_logic_and" value="true"/>
         <parameter key="filters_check_metadata" value="true"/>
       </operator>
-      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (2)" width="90" x="313" y="442">
+      <operator activated="true" class="aggregate" compatibility="9.10.001" expanded="true" height="82" name="Aggregate (2)" width="90" x="179" y="442">
         <parameter key="use_default_aggregation" value="false"/>
         <parameter key="attribute_filter_type" value="all"/>
         <parameter key="attribute" value=""/>
@@ -4771,29 +4800,31 @@
         <parameter key="include_special_attributes" value="false"/>
         <parameter key="default_aggregation_function" value="average"/>
         <list key="aggregation_attributes">
-          <parameter key="average(Humidade relativa média diária (%))" value="average"/>
-          <parameter key="average(Precipitação diária (mm))" value="average"/>
-          <parameter key="average(Temperatura do ar média diária (°C))" value="average"/>
-          <parameter key="average(Velocidade do vento média diária (m/s))" value="average"/>
-          <parameter key="teste" value="count"/>
+          <parameter key="Humidade relativa média diária (%)" value="average"/>
+          <parameter key="Precipitação média diária (mm)" value="average"/>
+          <parameter key="Temperatura do ar média diária (°C)" value="average"/>
+          <parameter key="Velocidade do vento média diária (m/s)" value="average"/>
+          <parameter key="chave" value="count"/>
+          <parameter key="duracao(horas)" value="average"/>
         </list>
-        <parameter key="group_by_attributes" value="ano|codigo1|Distrito"/>
+        <parameter key="group_by_attributes" value="ano|codigo1|distrito"/>
         <parameter key="count_all_combinations" value="false"/>
         <parameter key="only_distinct" value="false"/>
         <parameter key="ignore_missings" value="true"/>
       </operator>
-      <operator activated="true" class="blending:rename" compatibility="9.10.001" expanded="true" height="82" name="Rename (35)" width="90" x="447" y="442">
+      <operator activated="true" class="blending:rename" compatibility="9.10.001" expanded="true" height="82" name="Rename (35)" width="90" x="313" y="442">
         <list key="rename attributes">
-          <parameter key="average(average(Humidade relativa média diária (%)))" value="Humidade relativa média anual (%)"/>
-          <parameter key="average(average(Precipitação diária (mm)))" value="Precipitação anual (mm)"/>
-          <parameter key="average(average(Temperatura do ar média diária (°C)))" value="Temperatura do ar anual diária (°C)"/>
-          <parameter key="average(average(Velocidade do vento média diária (m/s)))" value="Velocidade do vento média anual (m/s)"/>
-          <parameter key="count(teste)" value="Numero de incendios"/>
+          <parameter key="average(Humidade relativa média diária (%))" value="Humidade relativa média anual (%)"/>
+          <parameter key="average(Precipitação média diária (mm))" value="Precipitação anual (mm)"/>
+          <parameter key="average(Temperatura do ar média diária (°C))" value="Temperatura do ar média anual (°C)"/>
+          <parameter key="average(Velocidade do vento média diária (m/s))" value="Velocidade do vento média anual (m/s)"/>
+          <parameter key="count(chave)" value="Numero de incendios"/>
+          <parameter key="average(duracao(horas))" value="Duração média"/>
         </list>
         <parameter key="from_attribute" value=""/>
         <parameter key="to_attribute" value=""/>
       </operator>
-      <operator activated="true" class="read_excel" compatibility="9.10.001" expanded="true" height="68" name="Read Excel" width="90" x="514" y="544">
+      <operator activated="true" class="read_excel" compatibility="9.10.001" expanded="true" height="68" name="Read Excel" width="90" x="380" y="544">
         <parameter key="excel_file" value="C:\Projeto\Datasets\despesas_bombeiros_PT.xlsx"/>
         <parameter key="sheet_selection" value="sheet number"/>
         <parameter key="sheet_number" value="1"/>
@@ -4811,7 +4842,7 @@
         </list>
         <parameter key="read_not_matching_values_as_missings" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (14)" width="90" x="648" y="442">
+      <operator activated="true" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (14)" width="90" x="447" y="442">
         <parameter key="remove_double_attributes" value="false"/>
         <parameter key="join_type" value="left"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -4820,7 +4851,7 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="read_excel" compatibility="9.10.001" expanded="true" height="68" name="Read Excel (2)" width="90" x="715" y="646">
+      <operator activated="true" class="read_excel" compatibility="9.10.001" expanded="true" height="68" name="Read Excel (2)" width="90" x="514" y="544">
         <parameter key="excel_file" value="C:\Projeto\Datasets\num_bombeiros_PT.xlsx"/>
         <parameter key="sheet_selection" value="sheet number"/>
         <parameter key="sheet_number" value="1"/>
@@ -4838,7 +4869,7 @@
         </list>
         <parameter key="read_not_matching_values_as_missings" value="false"/>
       </operator>
-      <operator activated="true" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (15)" width="90" x="849" y="442">
+      <operator activated="true" class="concurrency:join" compatibility="9.10.001" expanded="true" height="82" name="Join (15)" width="90" x="581" y="442">
         <parameter key="remove_double_attributes" value="false"/>
         <parameter key="join_type" value="left"/>
         <parameter key="use_id_attribute_as_key" value="false"/>
@@ -4847,18 +4878,29 @@
         </list>
         <parameter key="keep_both_join_attributes" value="false"/>
       </operator>
-      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (3)" width="90" x="983" y="442">
-        <parameter key="repository_entry" value="../store/dados_com_missing"/>
+      <operator activated="true" class="store" compatibility="9.10.001" expanded="true" height="68" name="Store (3)" width="90" x="715" y="442">
+        <parameter key="repository_entry" value="../store/dados_com_missing_final"/>
       </operator>
-      <connect from_op="Incendios" from_port="out 1" to_port="result 1"/>
+      <operator activated="true" class="write_csv" compatibility="9.10.001" expanded="true" height="82" name="Write CSV" width="90" x="849" y="442">
+        <parameter key="csv_file" value="C:/Projeto/store/saida.csv"/>
+        <parameter key="column_separator" value=";"/>
+        <parameter key="write_attribute_names" value="true"/>
+        <parameter key="quote_nominal_values" value="true"/>
+        <parameter key="format_date_attributes" value="true"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="append_to_file" value="false"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
       <connect from_op="Retrieve incendios" from_port="output" to_op="Subprocess (19)" to_port="in 1"/>
       <connect from_op="Subprocess (19)" from_port="out 1" to_op="Join (13)" to_port="left"/>
       <connect from_op="Loop Files" from_port="output 1" to_op="Append (3)" to_port="example set 1"/>
       <connect from_op="Append (3)" from_port="merged set" to_op="Subprocess (20)" to_port="in 1"/>
-      <connect from_op="Subprocess (20)" from_port="out 1" to_op="Store (4)" to_port="input"/>
-      <connect from_op="Store (4)" from_port="through" to_op="Join (13)" to_port="right"/>
-      <connect from_op="Join (13)" from_port="join" to_op="Store (2)" to_port="input"/>
-      <connect from_op="Store (2)" from_port="through" to_port="result 2"/>
+      <connect from_op="Subprocess (20)" from_port="out 1" to_op="Join (13)" to_port="right"/>
+      <connect from_op="Join (13)" from_port="join" to_op="Nominal to Date (2)" to_port="example set input"/>
+      <connect from_op="Nominal to Date (2)" from_port="example set output" to_op="Nominal to Date (21)" to_port="example set input"/>
+      <connect from_op="Nominal to Date (21)" from_port="example set output" to_op="Generate Attributes (67)" to_port="example set input"/>
+      <connect from_op="Generate Attributes (67)" from_port="example set output" to_op="Rename (36)" to_port="example set input"/>
+      <connect from_op="Rename (36)" from_port="example set output" to_op="Store (2)" to_port="input"/>
       <connect from_op="Retrieve incmet" from_port="output" to_op="Aggregate (2)" to_port="example set input"/>
       <connect from_op="Aggregate (2)" from_port="example set output" to_op="Rename (35)" to_port="example set input"/>
       <connect from_op="Rename (35)" from_port="example set output" to_op="Join (14)" to_port="left"/>
@@ -4866,12 +4908,11 @@
       <connect from_op="Join (14)" from_port="join" to_op="Join (15)" to_port="left"/>
       <connect from_op="Read Excel (2)" from_port="output" to_op="Join (15)" to_port="right"/>
       <connect from_op="Join (15)" from_port="join" to_op="Store (3)" to_port="input"/>
-      <connect from_op="Store (3)" from_port="through" to_port="result 3"/>
+      <connect from_op="Store (3)" from_port="through" to_op="Write CSV" to_port="input"/>
+      <connect from_op="Write CSV" from_port="through" to_port="result 1"/>
       <portSpacing port="source_input 1" spacing="0"/>
       <portSpacing port="sink_result 1" spacing="0"/>
       <portSpacing port="sink_result 2" spacing="0"/>
-      <portSpacing port="sink_result 3" spacing="0"/>
-      <portSpacing port="sink_result 4" spacing="0"/>
     </process>
   </operator>
 </process>
